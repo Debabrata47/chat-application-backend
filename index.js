@@ -1,6 +1,10 @@
 const express = require("express");
 const cors = require("cors");
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://friendlyy.vercel.app/login", "http://localhost:3000"],
+  })
+);
 const mongoose = require("mongoose");
 const authRoutes = require("./routes/auth");
 const messageRoutes = require("./routes/messages");
@@ -24,10 +28,8 @@ mongoose
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
-const PORT = process.env.PORT || 8000
-const server = app.listen(PORT, () =>
-  console.log(`Server started on ${PORT}`)
-);
+const PORT = process.env.PORT || 8000;
+const server = app.listen(PORT, () => console.log(`Server started on ${PORT}`));
 const io = socket(server, {
   cors: {
     origin: "*" || "http://localhost:3000/",
