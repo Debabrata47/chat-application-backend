@@ -1,5 +1,6 @@
 const User = require("../models/userModel");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports.login = async (req, res, next) => {
   try {
@@ -11,7 +12,11 @@ module.exports.login = async (req, res, next) => {
     if (!isPasswordValid)
       return res.json({ msg: "Incorrect Username or Password", status: false });
     delete user.password;
-    return res.json({ status: true, user });
+    return res.json({
+      status: true,
+      user,
+      // token: jwt.sign(process.env.SECRET, user._id),
+    });
   } catch (ex) {
     next(ex);
   }
