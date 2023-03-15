@@ -5,7 +5,7 @@ require("dotenv").config();
 const cors = require("cors");
 app.use(
   cors({
-    origin: ["https://friendlyy.vercel.app/login", "http://localhost:3000"],
+    origin: ["https://friendlyy.vercel.app", "http://localhost:3000"],
   })
 );
 const mongoose = require("mongoose");
@@ -29,7 +29,7 @@ mongoose
 
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
-const PORT = process.env.PORT || 8000;
+const PORT = process.env.PORT;
 const server = app.listen(PORT, () => console.log(`Server started on ${PORT}`));
 const io = socket(server, {
   cors: {
