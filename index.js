@@ -27,8 +27,8 @@ mongoose
     console.log(err.message);
   });
 
-app.use("/api/auth", cors(), authRoutes);
-app.use("/api/messages", cors(), messageRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/messages", messageRoutes);
 const PORT = process.env.PORT || 8000;
 const server = app.listen(PORT, () => console.log(`Server started on ${PORT}`));
 const io = socket(server, {
